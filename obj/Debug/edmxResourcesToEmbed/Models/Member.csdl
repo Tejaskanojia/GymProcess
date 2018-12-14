@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GymProcessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tbl_Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Addess" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Weight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Height" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MemberType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDetail" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IsCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="ImageURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRole" Relationship="GymProcessModel.FK_AspNetRoles_RoleId" FromRole="Tbl_Member" ToRole="AspNetRole" />
+    <Property Name="SchemeId" Type="Int32" />
+    <NavigationProperty Name="Scheme" Relationship="GymProcessModel.FK_Tbl_Member_Scheme" FromRole="Tbl_Member" ToRole="Scheme" />
+    <Property Name="AspUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="GymProcessEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tbl_Member" EntityType="Self.Tbl_Member" />
+    <EntitySet Name="C__MigrationHistory" EntityType="GymProcessModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="GymProcessModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="GymProcessModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="GymProcessModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="GymProcessModel.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="GymProcessModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="GymProcessModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="GymProcessModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetRoles_AspNetRoles" Association="GymProcessModel.FK_AspNetRoles_AspNetRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetRole1" EntitySet="AspNetRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetRoles_RoleId" Association="GymProcessModel.FK_AspNetRoles_RoleId">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="Tbl_Member" EntitySet="Tbl_Member" />
+    </AssociationSet>
+    <EntitySet Name="Schemes" EntityType="GymProcessModel.Scheme" />
+    <AssociationSet Name="FK_Tbl_Member_Scheme" Association="GymProcessModel.FK_Tbl_Member_Scheme">
+      <End Role="Scheme" EntitySet="Schemes" />
+      <End Role="Tbl_Member" EntitySet="Tbl_Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Scheme_Scheme1" Association="GymProcessModel.FK_Scheme_Scheme1">
+      <End Role="Scheme" EntitySet="Schemes" />
+      <End Role="Scheme1" EntitySet="Schemes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_AspNetUsers" Association="GymProcessModel.FK_AspNetUsers_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <FunctionImport Name="SP_GETUSERBYID" ReturnType="Collection(GymProcessModel.SP_GETUSERBYID_Result)">
+      <Parameter Name="Id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getUserDetailByID" ReturnType="Collection(GymProcessModel.sp_getUserById_Result1)">
+      <Parameter Name="Id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getUserDetail" ReturnType="Collection(GymProcessModel.SP_GETUSERBYID_Result2)">
+      <Parameter Name="Id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_GetUserDetails">
+      <Parameter Name="Id" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="GymProcessModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetRoles1" Relationship="GymProcessModel.FK_AspNetRoles_AspNetRoles" FromRole="AspNetRole" ToRole="AspNetRole1" />
+    <NavigationProperty Name="AspNetRole1" Relationship="GymProcessModel.FK_AspNetRoles_AspNetRoles" FromRole="AspNetRole1" ToRole="AspNetRole" />
+    <NavigationProperty Name="Tbl_Member" Relationship="GymProcessModel.FK_AspNetRoles_RoleId" FromRole="AspNetRole" ToRole="Tbl_Member" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GymProcessModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GymProcessModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="GymProcessModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="GymProcessModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="GymProcessModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="GymProcessModel.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUser1" />
+    <NavigationProperty Name="AspNetUser1" Relationship="GymProcessModel.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUser1" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="GymProcessModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GymProcessModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="GymProcessModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GymProcessModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="GymProcessModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="GymProcessModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_AspNetRoles_AspNetRoles">
+    <End Type="GymProcessModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+    <End Type="GymProcessModel.AspNetRole" Role="AspNetRole1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetRole1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetRoles_RoleId">
+    <End Type="GymProcessModel.AspNetRole" Role="AspNetRole" Multiplicity="0..1" />
+    <End Type="GymProcessModel.Tbl_Member" Role="Tbl_Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Member">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Scheme">
+    <Key>
+      <PropertyRef Name="SchemeId" />
+    </Key>
+    <Property Name="SchemeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SchemeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Member" Relationship="GymProcessModel.FK_Tbl_Member_Scheme" FromRole="Scheme" ToRole="Tbl_Member" />
+    <NavigationProperty Name="Scheme1" Relationship="GymProcessModel.FK_Scheme_Scheme1" FromRole="Scheme" ToRole="Scheme1" />
+    <NavigationProperty Name="Scheme2" Relationship="GymProcessModel.FK_Scheme_Scheme1" FromRole="Scheme1" ToRole="Scheme" />
+  </EntityType>
+  <Association Name="FK_Tbl_Member_Scheme">
+    <End Type="GymProcessModel.Scheme" Role="Scheme" Multiplicity="0..1" />
+    <End Type="GymProcessModel.Tbl_Member" Role="Tbl_Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scheme">
+        <PropertyRef Name="SchemeId" />
+      </Principal>
+      <Dependent Role="Tbl_Member">
+        <PropertyRef Name="SchemeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Scheme_Scheme1">
+    <End Type="GymProcessModel.Scheme" Role="Scheme" Multiplicity="1" />
+    <End Type="GymProcessModel.Scheme" Role="Scheme1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Scheme">
+        <PropertyRef Name="SchemeId" />
+      </Principal>
+      <Dependent Role="Scheme1">
+        <PropertyRef Name="SchemeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_AspNetUsers">
+    <End Type="GymProcessModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GymProcessModel.AspNetUser" Role="AspNetUser1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_GETUSERBYID_Result">
+    <Property Type="String" Name="MemberName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="Decimal" Name="PaymentDetail" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="SchemeId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_getUserById_Result1">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="SP_GETUSERBYID_Result2">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="MemberName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="10" />
+  </ComplexType>
+</Schema>

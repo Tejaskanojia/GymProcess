@@ -1,0 +1,184 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@*@model PagedList.IPagedList<GymProcess.Models.Tbl_Member>*@
+@model IEnumerable<GymProcess.Models.Tbl_Member>
+
+
+@{
+    ViewBag.Title = "Index";
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Member", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+    <div class="container">
+        <table class="table" id="myTable" style="background-color: white; width: 100%;" AutoGenerateColumns="false">
+            <tr>
+                <th style="border: 1px solid black; text-align: left; width: 20%; padding-left: 20px;">
+                    @Html.ActionLink("Member Name", "Index",
+                   new { sortOrder = "Member", CurrentSort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.ActionLink("Mobile", "Index",
+                  new { sortOrder = "Phone", CurrentSort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.ActionLink("Email", "Index",
+                new { sortOrder = "Email", CurrentSort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                </th>
+
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("DateOfBirth")
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("Addess")
+                </th>
+                @*<th>
+                    @Html.DisplayName("Sex")
+                </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.ImageURL)
+                </th>*@
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("Weight")
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("Height")
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("BloodGroup")
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("MemberType")
+                </th>
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("PaymentDetail")
+                </th>
+
+                <th style="border: 2px solid black; text-align: center; width: 20%">
+                    @Html.DisplayName("Scheme.SchemeName")
+                </th>
+                @*<th>
+                    @Html.DisplayName("Roles")
+                </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.IsCreated)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDeleted)
+                </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.MemberName)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Addess)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>*@
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.ImageURL)
+                    </td>*@
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Height)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.BloodGroup)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.MemberType)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.PaymentDetail)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.Scheme.SchemeName)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.DisplayFor(modelItem => item.AspNetRole)
+                    </td>
+                    <td style="padding-left: 20px;">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MemberId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MemberId })
+                    </td>
+                </tr>
+
+            }
+
+
+        </table>
+        <br />
+        @*<div id='Paging' style="text-align:center">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>*@
+        @using (Html.BeginForm("exportExel", "member", FormMethod.Post))
+        {
+            <input type="submit" value="Export" />
+        }
+    </div>
+
+@section scripts{
+    
+    <script>
+
+        $(document).ready(function () {
+            $("#myTable").DataTable(
+                {
+                    "ajax": {
+                        "url": "Member/Member/GetList",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "MemberName" },
+                        { "data": "Mobile" },
+                        { "data": "Address" },
+                        { "data": "Email" },
+                        { "data": "BloodGroup" },
+                        { "data": "Height" },
+                        { "data": "Weight" },
+                        { "data": "Schemes" },
+                        { "data": "MemberType" },
+                        { "data": "PayementDetails" }
+                    ]
+                });
+        });
+
+
+
+
+               
+    </script>
+}
+

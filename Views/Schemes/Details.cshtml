@@ -1,0 +1,26 @@
+﻿@model GymProcess.Models.Scheme
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Scheme</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SchemeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchemeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SchemeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

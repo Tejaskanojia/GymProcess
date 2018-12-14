@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GymProcessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Tbl_Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+    <Property Name="IsCreated" Type="datetime" />
+    <Property Name="Isdeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="char" MaxLength="10" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Addess" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sex" Type="bit" />
+    <Property Name="Photo" Type="varbinary" MaxLength="50" />
+    <Property Name="Weight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Height" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BloodGroup" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MemberType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentDetail" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="IsCreated" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Tbl_Admin_Tbl_Admin">
+    <End Role="Tbl_Admin" Type="Self.Tbl_Admin" Multiplicity="1" />
+    <End Role="Tbl_Admin1" Type="Self.Tbl_Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Tbl_Admin1">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GymProcessModelStoreContainer">
+    <EntitySet Name="Tbl_Admin" EntityType="Self.Tbl_Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Member" EntityType="Self.Tbl_Member" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Tbl_Admin_Tbl_Admin" Association="Self.FK_Tbl_Admin_Tbl_Admin">
+      <End Role="Tbl_Admin" EntitySet="Tbl_Admin" />
+      <End Role="Tbl_Admin1" EntitySet="Tbl_Admin" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
